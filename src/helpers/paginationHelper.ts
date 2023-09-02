@@ -52,7 +52,7 @@ const calculatePagination = (options: IOptions): IOptionsResult => {
   const page = Number(options?.page || 1);
   const size = Number(options.size || 10);
   const skip = (page - 1) * size;
-  const sortOrder = options.sortOrder || 'dese';
+  const sortOrder = options.sortOrder || 'desc';
   const sortBy = options.sortBy || 'createdAt';
 
   return {
