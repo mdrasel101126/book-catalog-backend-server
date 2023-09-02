@@ -17,6 +17,7 @@ router.patch(
 );
 router.delete('/:id', BookController.deleteBook);
 router.get('/', BookController.getAllBooks);
+router.get('/:categoryId/category', BookController.getBooksByCategory);
 router.get('/:id', BookController.getSingleBookById);
 
 export const BookRoutes = router;
