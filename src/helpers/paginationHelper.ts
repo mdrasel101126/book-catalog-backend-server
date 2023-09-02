@@ -33,3 +33,35 @@ const calculatePagination = (options: IOptions): IOptionsResult => {
 export const paginationHelpers = {
   calculatePagination,
 }; */
+
+type IOptions = {
+  page?: number;
+  size?: number;
+  sortBy?: string;
+  sortOrder?: string;
+};
+type IOptionsResult = {
+  page: number;
+  size: number;
+  sortOrder: string;
+  sortBy: string;
+  skip: number;
+};
+
+const calculatePagination = (options: IOptions): IOptionsResult => {
+  const page = Number(options?.page || 1);
+  const size = Number(options.size || 10);
+  const skip = (page - 1) * size;
+  const sortOrder = options.sortOrder || 'dese';
+  const sortBy = options.sortBy || 'createdAt';
+
+  return {
+    page,
+    size,
+    skip,
+    sortOrder,
+    sortBy,
+  };
+};
+
+export const paginationHelper = { calculatePagination };
