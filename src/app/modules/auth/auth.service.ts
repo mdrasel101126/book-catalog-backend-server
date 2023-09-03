@@ -34,21 +34,12 @@ const signinUser = async (
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Invalid password!');
   }
   const accessToken = jwtHelpers.createToken(
-    { email: user.email, _id: user.id },
+    { id: user.id, role: user.role },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string
   );
   console.log(accessToken);
   return { token: accessToken };
 };
-
-/* const getProfile = async (id: string): Promise<IUser | null> => {
-  const isUserExist = await User.isUserExist(id);
-  if (!isUserExist) {
-    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
-  }
-
-  return isUserExist;
-}; */
 
 export const AuthService = { signupteUser, signinUser };
