@@ -1,12 +1,11 @@
 import { User } from '@prisma/client';
-import prisma from '../../../shared/prisma';
-import { removeFields } from '../../../shared/utils';
-
 import httpStatus from 'http-status';
 import { Secret } from 'jsonwebtoken';
 import config from '../../../config';
 import ApiError from '../../../errors/ApiError';
 import { jwtHelpers } from '../../../helpers/jwtHelpers';
+import prisma from '../../../shared/prisma';
+import { removeFields } from '../../../shared/utils';
 import { ISigninResponse } from './auth.interface';
 
 const signupteUser = async (data: User): Promise<Partial<User>> => {
@@ -20,7 +19,7 @@ const signupteUser = async (data: User): Promise<Partial<User>> => {
 const signinUser = async (
   payload: Pick<User, 'email' | 'password'>
 ): Promise<ISigninResponse> => {
-  console.log(payload);
+  //console.log(payload);
   const user = await prisma.user.findFirst({
     where: {
       email: payload.email,
@@ -38,7 +37,7 @@ const signinUser = async (
     config.jwt.secret as Secret,
     config.jwt.expires_in as string
   );
-  console.log(accessToken);
+  // console.log(accessToken);
   return { token: accessToken };
 };
 

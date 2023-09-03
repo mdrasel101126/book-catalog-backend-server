@@ -7,7 +7,21 @@ import { OrderService } from './order.service';
 
 const createOrder = catchAsync(async (req: Request, res: Response) => {
   //console.log(req.body);
-  const result = await OrderService.createOrder(req.body);
+  const result = await OrderService.createOrder(req.user?.id, req.body);
+
+  sendResponse<Order>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Order created successfully',
+    data: result,
+  });
+});
+const getSingleOrder = catchAsync(async (req: Request, res: Response) => {
+  //console.log(req.body);
+  const result = await OrderService.getSingleOrder(
+    { id: req.user?.id, role: req.user?.role },
+    req.params?.id
+  );
 
   sendResponse<Order>(res, {
     statusCode: httpStatus.OK,
@@ -17,4 +31,4 @@ const createOrder = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-export const OrderController = { createOrder };
+export const OrderController = { createOrder, getSingleOrder };
