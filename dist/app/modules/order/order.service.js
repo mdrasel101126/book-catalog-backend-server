@@ -51,4 +51,8 @@ const getSingleOrder = (user, id) => __awaiter(void 0, void 0, void 0, function*
     }
     return result;
 });
-exports.OrderService = { createOrder, getSingleOrder };
+const getAllOrders = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield prisma_1.default.order.findMany({});
+    return result;
+});
+exports.OrderService = { createOrder, getSingleOrder, getAllOrders };

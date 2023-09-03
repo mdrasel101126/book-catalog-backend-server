@@ -12,5 +12,6 @@ const order_controller_1 = require("./order.controller");
 const order_validation_1 = require("./order.validation");
 const router = (0, express_1.Router)();
 router.post('/create-order', (0, auth_1.default)(user_1.ENUM_USER_ROLE.CUSTOMER), (0, validateRequest_1.default)(order_validation_1.OrderValidation.createOrder), order_controller_1.OrderController.createOrder);
+router.get('/', (0, auth_1.default)(user_1.ENUM_USER_ROLE.ADMIN), order_controller_1.OrderController.getAllOrders);
 router.get('/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.CUSTOMER, user_1.ENUM_USER_ROLE.ADMIN), order_controller_1.OrderController.getSingleOrder);
 exports.OrderRoutes = router;
